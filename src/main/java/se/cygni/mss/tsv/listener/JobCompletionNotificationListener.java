@@ -29,7 +29,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             log.info("!!! JOB FINISHED! Time to verify the results");
 
             List<Rating> results = jdbcTemplate
-                    .query("SELECT first_name, last_name FROM people", new RowMapper<Rating>() {
+                    .query("SELECT tconst, average_rating, num_votes FROM rating", new RowMapper<Rating>() {
                         @Override
                         public Rating mapRow(ResultSet rs, int row) throws SQLException {
                             return new Rating(rs.getString(1), rs.getString(2),  rs.getString(3));
