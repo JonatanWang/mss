@@ -38,7 +38,7 @@ public class FileProcessor {
     public static void unzip() {
         for (String filename : FILE_NAMES) {
             String sourceFile = "./downloads/" + filename;
-            String targetFile = "./downloads/" + FilenameUtils.getBaseName(filename);
+            String targetFile = "src/main/resources/" + FilenameUtils.getBaseName(filename);
             Gunzipper.unzip(sourceFile, targetFile);
         }
     }

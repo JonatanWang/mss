@@ -1,0 +1,15 @@
+
+version: '3'
+services:
+  mss-mysql:
+    container_name: mss-mysql
+    image: mysql
+    environment:
+      MYSQL_DATABASE: mss
+      MYSQL_USER: springuser
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3308:3306"
+    restart: always

@@ -32,3 +32,6 @@ build/
 
 ### Download files ###
 downloads
+
+### TSV files ###
+src/main/resources/*.tsv

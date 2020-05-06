@@ -13,5 +13,4 @@ public class MovieSearchServicesApplication {
 		FileProcessor.unzip();
 		SpringApplication.run(MovieSearchServicesApplication.class, args);
 	}
-
 }
