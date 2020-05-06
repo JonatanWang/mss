@@ -11,7 +11,7 @@ public class FileProcessor {
 
     private static final String STEM_FILE_URL = "https://datasets.imdbws.com/";
     private static final String[] FILE_NAMES = {
-            "name-basics.tsv.gz",
+            "name.basics.tsv.gz",
             "title.basics.tsv.gz",
             "title.principals.tsv.gz",
             "title.ratings.tsv.gz"};
@@ -37,8 +37,8 @@ public class FileProcessor {
 
     public static void unzip() {
         for (String filename : FILE_NAMES) {
-            String sourceFile = filename;
-            String targetFile = FilenameUtils.getBaseName(filename);
+            String sourceFile = "./downloads/" + filename;
+            String targetFile = "./downloads/" + FilenameUtils.getBaseName(filename);
             Gunzipper.unzip(sourceFile, targetFile);
         }
     }
