@@ -9,8 +9,10 @@ public class MovieSearchServicesApplication {
 
 	public static void main(String[] args) {
 
+		/**
 		FileProcessor.download();
 		FileProcessor.unzip();
+		 */
 		SpringApplication.run(MovieSearchServicesApplication.class, args);
 	}
 }

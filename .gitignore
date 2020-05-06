@@ -35,3 +35,6 @@ downloads
 
 ### TSV files ###
 src/main/resources/*.tsv
+
+### .DS_Store ###
+src/main/.DS_Store

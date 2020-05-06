@@ -23,7 +23,7 @@ import se.cygni.mss.tsv.processor.RatingItemProcessor;
 
 @Configuration
 @EnableBatchProcessing
-public class BatchConfiguration {
+public class RatingBatchConfiguration {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -39,6 +39,7 @@ public class BatchConfiguration {
         FlatFileItemReader<Rating> reader = new FlatFileItemReader<>();
         reader.setResource(new ClassPathResource("title.ratings.tsv"));
         reader.setLinesToSkip(1);   /** Escape the 1st line of header */
+        reader.setMaxItemCount(1000);
         reader.setLineMapper(new DefaultLineMapper<Rating>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames(new String[]{"tconst", "averageRating", "numVotes"});
@@ -50,6 +51,7 @@ public class BatchConfiguration {
         }});
         return reader;
     }
+
 
     @Bean
     public RatingItemProcessor processor() {
@@ -77,8 +79,8 @@ public class BatchConfiguration {
 
     // tag::jobstep[]
     @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener) {
-        return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer())
+    public Job importRatingJob(JobCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("importRatingJob").incrementer(new RunIdIncrementer())
                 .listener(listener).flow(step1()).end().build();
     }
 
