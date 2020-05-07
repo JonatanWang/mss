@@ -1,6 +1,5 @@
 package se.cygni.mss.tsv.jobs;
 
-import javax.sql.DataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -17,13 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import se.cygni.mss.tsv.listener.ImportPrincipalsCompletionNotificationListener;
 import se.cygni.mss.tsv.listener.ImportRatingsCompletionNotificationListener;
+import se.cygni.mss.tsv.model.Principal;
 import se.cygni.mss.tsv.model.Rating;
-import se.cygni.mss.tsv.processor.RatingItemProcessor;
+import se.cygni.mss.tsv.processor.PrincipalItemProcessor;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing
-public class RatingBatchConfiguration {
+public class PrincipalBatchConfiguration {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -35,22 +38,22 @@ public class RatingBatchConfiguration {
 
     // tag::readerwriterprocessor[]
     @Bean
-    public FlatFileItemReader<Rating> reader() {
-        FlatFileItemReader<Rating> reader = new FlatFileItemReader<>();
-        reader.setResource(new ClassPathResource("title.ratings.tsv"));
+    public FlatFileItemReader<Principal> readerPrincipal() {
+        FlatFileItemReader<Principal> reader = new FlatFileItemReader<>();
+        reader.setResource(new ClassPathResource("title.principals.tsv"));
 
         /** Escape the 1st line of header */
         reader.setLinesToSkip(1);
         // Read a limited number of lines for testing purpose
         reader.setMaxItemCount(10);
 
-        reader.setLineMapper(new DefaultLineMapper<Rating>() {{
+        reader.setLineMapper(new DefaultLineMapper<Principal>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
-                setNames(new String[]{"tconst", "averageRating", "numVotes"});
+                setNames(new String[]{"tconst", "ordering", "nconst", "category", "job", "characters"});
                 setDelimiter("\t"); /** Set '\t' as TSV delimiter*/
             }});
-            setFieldSetMapper(new BeanWrapperFieldSetMapper<Rating>() {{
-                setTargetType(Rating.class);
+            setFieldSetMapper(new BeanWrapperFieldSetMapper<Principal>() {{
+                setTargetType(Principal.class);
             }});
         }});
         return reader;
@@ -58,23 +61,27 @@ public class RatingBatchConfiguration {
 
 
     @Bean
-    public RatingItemProcessor processor() {
-        return new RatingItemProcessor();
+    public PrincipalItemProcessor processorPrincipal() {
+        return new PrincipalItemProcessor();
     }
 
     @Bean
-    public JdbcBatchItemWriter<Rating> writer() {
-        JdbcBatchItemWriter<Rating> writer = new JdbcBatchItemWriter<>();
+    public JdbcBatchItemWriter<Principal> writerPrincipal() {
+        JdbcBatchItemWriter<Principal> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(
-                new BeanPropertyItemSqlParameterSourceProvider<Rating>());
-        writer.setSql("DROP TABLE IF EXISTS rating;");
-        writer.setSql("CREATE TABLE rating  (\n" +
-                "    rating_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
+                new BeanPropertyItemSqlParameterSourceProvider<Principal>());
+        writer.setSql("DROP TABLE IF EXISTS principal;");
+        writer.setSql("CREATE TABLE principal  (\n" +
+                "    principal_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
                 "    tconst VARCHAR(20),\n" +
-                "    average_rating VARCHAR(20),\n" +
-                "    num_votes VARCHAR(20)\n" +
+                "    ordering VARCHAR(20),\n" +
+                "    nconst VARCHAR(20),\n" +
+                "    category VARCHAR(255),\n" +
+                "    job VARCHAR(255),\n" +
+                "    characters VARCHAR(1000)\n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
-        writer.setSql("INSERT INTO rating (tconst, average_rating, num_votes) VALUES (:tconst, :averageRating, :numVotes)");
+        writer.setSql("INSERT INTO principal (tconst, ordering, nconst, category, job, characters) " +
+                "VALUES (:tconst, :ordering, :nconst, :category, :job, :characters)");
         writer.setDataSource(dataSource);
         return writer;
     }
@@ -83,15 +90,15 @@ public class RatingBatchConfiguration {
 
     // tag::jobstep[]
     @Bean
-    public Job importRatingJob(ImportRatingsCompletionNotificationListener listener) {
-        return jobBuilderFactory.get("importRatingJob").incrementer(new RunIdIncrementer())
-                .listener(listener).flow(buildFactoryForRatings()).end().build();
+    public Job importPrincipalJob(ImportPrincipalsCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("importPrincipalJob").incrementer(new RunIdIncrementer())
+                .listener(listener).flow(buildFactoryForPrincipals()).end().build();
     }
 
     @Bean
-    public Step buildFactoryForRatings() {
-        return stepBuilderFactory.get("buildFactoryForRatings").<Rating, Rating>chunk(10).reader(reader())
-                .processor(processor()).writer(writer()).build();
+    public Step buildFactoryForPrincipals() {
+        return stepBuilderFactory.get("buildFactoryForPrincipals").<Principal, Principal>chunk(10).reader(readerPrincipal())
+                .processor(processorPrincipal()).writer(writerPrincipal()).build();
     }
     // end::jobstep[]
 }
