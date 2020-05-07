@@ -16,11 +16,11 @@ import se.cygni.mss.tsv.model.Rating;
 
 @Component
 @Slf4j
-public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
+public class ImportRatingCompletionNotificationListener extends JobExecutionListenerSupport {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+    public ImportRatingCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

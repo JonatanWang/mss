@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import se.cygni.mss.tsv.listener.JobCompletionNotificationListener;
+import se.cygni.mss.tsv.listener.ImportRatingCompletionNotificationListener;
 import se.cygni.mss.tsv.model.Rating;
 import se.cygni.mss.tsv.processor.RatingItemProcessor;
 
@@ -38,8 +38,12 @@ public class RatingBatchConfiguration {
     public FlatFileItemReader<Rating> reader() {
         FlatFileItemReader<Rating> reader = new FlatFileItemReader<>();
         reader.setResource(new ClassPathResource("title.ratings.tsv"));
-        reader.setLinesToSkip(1);   /** Escape the 1st line of header */
-        reader.setMaxItemCount(1000);
+
+        /** Escape the 1st line of header */
+        reader.setLinesToSkip(1);
+        // Read a limited number of lines for testing purpose
+        reader.setMaxItemCount(10);
+
         reader.setLineMapper(new DefaultLineMapper<Rating>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames(new String[]{"tconst", "averageRating", "numVotes"});
@@ -79,14 +83,14 @@ public class RatingBatchConfiguration {
 
     // tag::jobstep[]
     @Bean
-    public Job importRatingJob(JobCompletionNotificationListener listener) {
+    public Job importRatingJob(ImportRatingCompletionNotificationListener listener) {
         return jobBuilderFactory.get("importRatingJob").incrementer(new RunIdIncrementer())
-                .listener(listener).flow(step1()).end().build();
+                .listener(listener).flow(buildFactoryForRatings()).end().build();
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1").<Rating, Rating>chunk(10).reader(reader())
+    public Step buildFactoryForRatings() {
+        return stepBuilderFactory.get("buildFactoryForRatings").<Rating, Rating>chunk(10).reader(reader())
                 .processor(processor()).writer(writer()).build();
     }
     // end::jobstep[]

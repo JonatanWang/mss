@@ -42,7 +42,8 @@ public class TitleBasicBatchConfiguration {
 
         /** Escape the 1st line of header */
         reader.setLinesToSkip(1);
-        reader.setMaxItemCount(1000);
+        // Read a limited number of lines for testing purpose
+        reader.setMaxItemCount(10);
 
         reader.setLineMapper(new DefaultLineMapper<TitleBasic>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
@@ -80,7 +81,7 @@ public class TitleBasicBatchConfiguration {
                 new BeanPropertyItemSqlParameterSourceProvider<>());
         writer.setSql("DROP TABLE IF EXISTS title_basic;");
         writer.setSql("CREATE TABLE title_basic  (\n" +
-                "    basic_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
+                "    title_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
                 "    tconst VARCHAR(20),\n" +
                 "    title_type VARCHAR(20),\n" +
                 "    primary_title VARCHAR(255),\n" +
@@ -121,12 +122,12 @@ public class TitleBasicBatchConfiguration {
     @Bean
     public Job importTitleBasicJob(ImportTitleBasicsCompletionNotificationListener listener) {
         return jobBuilderFactory.get("importTitleBasicJob").incrementer(new RunIdIncrementer())
-                .listener(listener).flow(step2()).end().build();
+                .listener(listener).flow(buildFactoryForTitleBasics()).end().build();
     }
 
     @Bean
-    public Step step2() {
-        return stepBuilderFactory.get("step2").<TitleBasic, TitleBasic>chunk(10).reader(readerTitleBasic())
+    public Step buildFactoryForTitleBasics() {
+        return stepBuilderFactory.get("buildFactoryForTitleBasics").<TitleBasic, TitleBasic>chunk(10).reader(readerTitleBasic())
                 .processor(processorTitleBasic()).writer(writerTitleBasic()).build();
     }
     // end::jobstep[]
