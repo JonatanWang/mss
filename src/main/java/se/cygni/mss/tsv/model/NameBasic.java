@@ -5,12 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.math.BigInteger;
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
 public class NameBasic {
 
+    @Id
+    private BigInteger name_id;
     private String nconst;
     private String primaryName;
     private String birthYear;
