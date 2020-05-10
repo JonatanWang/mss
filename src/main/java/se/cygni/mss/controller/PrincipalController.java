@@ -20,17 +20,17 @@ public class PrincipalController {
     }
 
     @GetMapping("/principal/tconst/{tconst}")
-    Iterable<Principal> findByTconst(@PathVariable String tconst) {
+    public Iterable<Principal> findByTconst(@PathVariable String tconst) {
         return principalService.findByTconst(tconst);
     }
 
     @GetMapping("/principal/nconst/{nconst}")
-    Iterable<Principal> findByNconst(@PathVariable String nconst) {
+    public Iterable<Principal> findByNconst(@PathVariable String nconst) {
         return principalService.findByNconst(nconst);
     }
 
     @GetMapping("/principal/search")
-    Iterable<Principal> findByTconstAndNconst(
+    public Iterable<Principal> findByTconstAndNconst(
             @RequestParam(value = "tconst", required = false) String tconst,
             @RequestParam(value = "nconst", required = false) String nconst
     ) {
