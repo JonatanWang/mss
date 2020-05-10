@@ -5,12 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.math.BigInteger;
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
 public class TitleBasic {
 
+    @Id
+    private BigInteger title_id;
     private String tconst;
     private String titleType;
     private String primaryTitle;
