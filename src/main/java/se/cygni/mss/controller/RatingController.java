@@ -9,7 +9,6 @@ import se.cygni.mss.service.RatingService;
 import se.cygni.mss.tsv.model.Rating;
 
 import javax.xml.bind.ValidationException;
-import java.util.Optional;
 
 @RestController
 public class RatingController {
@@ -28,7 +27,7 @@ public class RatingController {
     }
 
     @GetMapping("/rating/search")
-    Iterable<Rating> findByQuery(@RequestParam(value = "tconst", required = false) String tconst,
+    Iterable<Rating> findByParameters(@RequestParam(value = "tconst", required = false) String tconst,
                                  @RequestParam(value = "averageRating", required = false) String averageRating) {
         if (tconst != null && averageRating != null) {
             return ratingService.findByTconstAndAverageRating(tconst, averageRating);
