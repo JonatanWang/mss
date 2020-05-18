@@ -11,7 +11,6 @@ import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @ToString
 public class TitleBasic {
@@ -27,6 +26,9 @@ public class TitleBasic {
     private String endYear;
     private String runtimeMinutes;
     private String genres;
+
+    public TitleBasic() {
+    }
 
     public TitleBasic(String tconst, String primaryTitle, String originalTitle, String genres) {
         this.tconst = tconst;

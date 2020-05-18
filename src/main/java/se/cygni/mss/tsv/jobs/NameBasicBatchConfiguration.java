@@ -76,6 +76,7 @@ public class NameBasicBatchConfiguration {
         writer.setItemSqlParameterSourceProvider(
                 new BeanPropertyItemSqlParameterSourceProvider<>());
         writer.setSql("DROP TABLE IF EXISTS name_basic;");
+        /**
         writer.setSql("CREATE TABLE name_basic  (\n" +
                 "    name_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
                 "    nconst VARCHAR(20),\n" +
@@ -85,6 +86,7 @@ public class NameBasicBatchConfiguration {
                 "    primary_profession VARCHAR(255),\n" +
                 "    known_for_titles VARCHAR(255) \n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+         */
         writer.setSql("INSERT INTO name_basic (" +
                 "nconst, " +
                 "primary_name, " +

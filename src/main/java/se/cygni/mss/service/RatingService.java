@@ -1,11 +1,23 @@
 package se.cygni.mss.service;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import se.cygni.mss.tsv.model.Rating;
 
-public interface RatingService extends CrudRepository<Rating, Integer> {
+public interface RatingService {
 
-    Iterable<Rating> findByTconst(String tconst);
-    Iterable<Rating> findByAverageRating(String averageRating);
-    Iterable<Rating> findByTconstAndAverageRating(String tconst, String averageRating);
+    Iterable<Rating> findAll();
+
+    Page<Rating> findByTconst(String tconst, Pageable pageable);
+
+    // Page<Rating> findByTconstUsingCustomQuery(String tconst, Pageable pageable);
+
+    // Page<Rating> findByFilteredAverageRatingQuery(String averageRating, Pageable pageable);
+
+    // Page<Rating> findByTconstAndFilteredAverageRatingQuery(String tconst, String averageRating, Pageable pageable);
+
+    long count();
+
+    void delete(Rating rating);
+
 }

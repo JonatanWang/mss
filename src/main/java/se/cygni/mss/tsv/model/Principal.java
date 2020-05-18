@@ -11,7 +11,6 @@ import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @ToString
 public class Principal {
@@ -24,6 +23,9 @@ public class Principal {
     private String category;
     private String job;
     private String characters;
+
+    public Principal() {
+    }
 
     public Principal(String tconst, String nconst, String category, String characters) {
         this.tconst = tconst;
