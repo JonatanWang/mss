@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigInteger;
 
@@ -17,6 +19,7 @@ import java.math.BigInteger;
 public class TitleBasic {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger title_id;
     private String tconst;
     private String titleType;
