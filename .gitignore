@@ -38,3 +38,5 @@ src/main/resources/*.tsv
 
 ### .DS_Store ###
 src/main/.DS_Store
+*.DS_Store
+src/main/java/se/cygni/.DS_Store
