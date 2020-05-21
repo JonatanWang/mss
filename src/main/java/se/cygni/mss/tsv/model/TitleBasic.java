@@ -13,13 +13,12 @@ import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @ToString
 public class TitleBasic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger title_id;
     private String tconst;
     private String titleType;
@@ -30,6 +29,8 @@ public class TitleBasic {
     private String endYear;
     private String runtimeMinutes;
     private String genres;
+
+    public TitleBasic() {}
 
     public TitleBasic(String tconst, String primaryTitle, String originalTitle, String genres) {
         this.tconst = tconst;

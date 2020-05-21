@@ -6,17 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @ToString
 public class NameBasic {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private BigInteger name_id;
     private String nconst;
     private String primaryName;
@@ -24,6 +26,8 @@ public class NameBasic {
     private String deathYear;
     private String primaryProfession;
     private String knownForTitles;
+
+    public NameBasic() {}
 
     public NameBasic(String nconst, String primaryName, String primaryProfession, String knownForTitles) {
         this.nconst = nconst;
