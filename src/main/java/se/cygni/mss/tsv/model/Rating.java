@@ -1,7 +1,5 @@
 package se.cygni.mss.tsv.model;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import javax.persistence.Entity;
@@ -14,7 +12,7 @@ import static org.springframework.data.elasticsearch.annotations.FieldType.Text;
 public class Rating {
 
     @Id
-    private BigInteger id;
+    private BigInteger rating_id;
 
     @Field(type = Text, fielddata = true)
     private String tconst;
@@ -38,11 +36,11 @@ public class Rating {
     }
 
     public BigInteger getId() {
-        return id;
+        return rating_id;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
+    public void setId(BigInteger rating_id) {
+        this.rating_id = rating_id;
     }
 
     public String getTconst() {
@@ -72,7 +70,7 @@ public class Rating {
     @Override
     public String toString() {
         return "Rating{" +
-                "id=" + id +
+                "rating_id=" + rating_id +
                 ", tconst='" + tconst + '\'' +
                 ", averageRating='" + averageRating + '\'' +
                 ", numVotes='" + numVotes + '\'' +
