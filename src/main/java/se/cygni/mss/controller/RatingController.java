@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import se.cygni.mss.tsv.model.Rating;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/ratingIndex")
 public class RatingController {
 
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
-    @GetMapping("/rating/{id}")
-    public Rating findById(@PathVariable("id")  String id) {
+    @GetMapping("/{rating_id}")
+    public Rating findById(@PathVariable("rating_id")  String rating_id) {
         return elasticsearchOperations
-                .queryForObject(GetQuery.getById(id.toString()), Rating.class);
+                .queryForObject(GetQuery.getById(rating_id.toString()), Rating.class);
     }
 }
