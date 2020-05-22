@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository;
 import se.cygni.mss.tsv.model.Rating;
 import java.math.BigInteger;
+import java.util.List;
 
 @Repository
 public interface RatingRepository extends ElasticsearchRepository<Rating, BigInteger> {
@@ -81,10 +82,13 @@ public interface RatingRepository extends ElasticsearchRepository<Rating, BigInt
         return null;
     }
 
-    @Query("{\"bool\": {\"must\": [{\"match\": {\"ratings.tconst\": \"?0\"}}]}}")
     Page<Rating> findByTconst(String tconst, Pageable pageable);
 
     /**
+    @Query("{\"bool\": {\"must\": [{\"match\": {\"ratings.tconst\": \"?0\"}}]}}")
+    Page<Rating> findByTconst(String tconst, Pageable pageable);
+
+
     @Query("{\"bool\": {\"must\": [{\"match\": {\"ratings.tconst\": \"?0\"}}]}}")
     Page<Rating> findByTconstUsingCustomQuery(String tconst, Pageable pageable);
 

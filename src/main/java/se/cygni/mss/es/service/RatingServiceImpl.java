@@ -3,6 +3,7 @@ package se.cygni.mss.es.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public Page<Rating> findByTconst(String tconst, Pageable pageable) {
-        return ratingRepository.findByTconst(tconst, pageable);
+    public Page<Rating> findByTconst(String tconst, PageRequest pageRequest) {
+        return ratingRepository.findByTconst(tconst, pageRequest);
     }
 
     @Override

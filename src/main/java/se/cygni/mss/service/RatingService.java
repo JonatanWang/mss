@@ -1,14 +1,14 @@
 package se.cygni.mss.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import se.cygni.mss.tsv.model.Rating;
 
 public interface RatingService {
 
     Iterable<Rating> findAll();
 
-    Page<Rating> findByTconst(String tconst, Pageable pageable);
+    Page<Rating> findByTconst(String tconst, PageRequest pageRequest);
 
     // Page<Rating> findByTconstUsingCustomQuery(String tconst, Pageable pageable);
 

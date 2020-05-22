@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.math.BigInteger;
 import static org.springframework.data.elasticsearch.annotations.FieldType.Text;
 
-@Document(indexName = "ratingIndex", type = "rating")
+@Document(indexName = "mss", type = "rating")
 @Entity
 public class Rating {
 
