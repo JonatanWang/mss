@@ -38,3 +38,6 @@ src/main/resources/*.tsv
 
 ### .DS_Store ###
 src/main/.DS_Store
+
+mysql-data
+elastic-data

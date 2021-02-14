@@ -1,7 +1,7 @@
+version: "3.6"
 
-version: '3'
 services:
-  mss-mysql:
+  mysql:
     container_name: mss-mysql
     image: mysql
     environment:
@@ -9,7 +9,35 @@ services:
       MYSQL_USER: springuser
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
     ports:
       - "3308:3306"
     restart: always
+
+  adminer:
+    container_name: mss-mysql-admin
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+      ADMINER_DESIGN: galkaev
+    ports:
+      - "8088:8080"
+    restart: always
+
+  elastic:
+    container_name: mss-elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./elastic-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: always
+
+networks:
+  default:
+    name: mss_default
