@@ -24,7 +24,7 @@ public class TitleBasicItemProcessor implements ItemProcessor<TitleBasic, TitleB
 
   @Override
   public TitleBasic process(TitleBasic titleBasic) throws Exception {
-    Request request = new Request("POST", "/title-basic/_doc");
+    Request request = new Request("POST", "/title-basic/_doc/" + titleBasic.getTconst());
     request.setJsonEntity(gson.toJson(titleBasic));
 
     elasticSearchClient.performRequestAsync(request, new ResponseListener() {
