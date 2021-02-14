@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class Principal {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private BigInteger principal_id;
+    private Integer principal_id;
     private String tconst;
     private String ordering;
     private String nconst;

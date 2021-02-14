@@ -75,16 +75,16 @@ public class NameBasicBatchConfiguration {
         JdbcBatchItemWriter<NameBasic> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(
                 new BeanPropertyItemSqlParameterSourceProvider<>());
-        writer.setSql("DROP TABLE IF EXISTS name_basic;");
-        writer.setSql("CREATE TABLE name_basic  (\n" +
-                "    name_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
-                "    nconst VARCHAR(20),\n" +
-                "    primary_name VARCHAR(255),\n" +
-                "    birth_year VARCHAR(20),\n" +
-                "    death_year VARCHAR(20),\n" +
-                "    primary_profession VARCHAR(255),\n" +
-                "    known_for_titles VARCHAR(255) \n" +
-                ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+        // writer.setSql("DROP TABLE IF EXISTS name_basic;");
+        // writer.setSql("CREATE TABLE name_basic  (\n" +
+        //         "    name_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
+        //         "    nconst VARCHAR(20),\n" +
+        //         "    primary_name VARCHAR(255),\n" +
+        //         "    birth_year VARCHAR(20),\n" +
+        //         "    death_year VARCHAR(20),\n" +
+        //         "    primary_profession VARCHAR(255),\n" +
+        //         "    known_for_titles VARCHAR(255) \n" +
+        //         ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
         writer.setSql("INSERT INTO name_basic (" +
                 "nconst, " +
                 "primary_name, " +

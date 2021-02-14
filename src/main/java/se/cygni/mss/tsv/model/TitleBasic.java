@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class TitleBasic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger title_id;
+    private Integer title_id;
     private String tconst;
     private String titleType;
     private String primaryTitle;

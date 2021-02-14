@@ -70,16 +70,16 @@ public class PrincipalBatchConfiguration {
         JdbcBatchItemWriter<Principal> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(
                 new BeanPropertyItemSqlParameterSourceProvider<Principal>());
-        writer.setSql("DROP TABLE IF EXISTS principal;");
-        writer.setSql("CREATE TABLE principal  (\n" +
-                "    principal_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
-                "    tconst VARCHAR(20),\n" +
-                "    ordering VARCHAR(20),\n" +
-                "    nconst VARCHAR(20),\n" +
-                "    category VARCHAR(255),\n" +
-                "    job VARCHAR(255),\n" +
-                "    characters VARCHAR(1000)\n" +
-                ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+        // writer.setSql("DROP TABLE IF EXISTS principal;");
+        // writer.setSql("CREATE TABLE principal  (\n" +
+        //         "    principal_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
+        //         "    tconst VARCHAR(20),\n" +
+        //         "    ordering VARCHAR(20),\n" +
+        //         "    nconst VARCHAR(20),\n" +
+        //         "    category VARCHAR(255),\n" +
+        //         "    job VARCHAR(255),\n" +
+        //         "    characters VARCHAR(1000)\n" +
+        //         ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
         writer.setSql("INSERT INTO principal (tconst, ordering, nconst, category, job, characters) " +
                 "VALUES (:tconst, :ordering, :nconst, :category, :job, :characters)");
         writer.setDataSource(dataSource);

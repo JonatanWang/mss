@@ -67,13 +67,13 @@ public class RatingBatchConfiguration {
         JdbcBatchItemWriter<Rating> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(
                 new BeanPropertyItemSqlParameterSourceProvider<Rating>());
-        writer.setSql("DROP TABLE IF EXISTS rating;");
-        writer.setSql("CREATE TABLE rating  (\n" +
-                "    rating_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
-                "    tconst VARCHAR(20),\n" +
-                "    average_rating VARCHAR(20),\n" +
-                "    num_votes VARCHAR(20)\n" +
-                ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+        // writer.setSql("DROP TABLE IF EXISTS rating;");
+        // writer.setSql("CREATE TABLE rating  (\n" +
+        //         "    rating_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,\n" +
+        //         "    tconst VARCHAR(20),\n" +
+        //         "    average_rating VARCHAR(20),\n" +
+        //         "    num_votes VARCHAR(20)\n" +
+        //         ")ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
         writer.setSql("INSERT INTO rating (tconst, average_rating, num_votes) VALUES (:tconst, :averageRating, :numVotes)");
         writer.setDataSource(dataSource);
         return writer;

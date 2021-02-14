@@ -7,6 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * This class grabs the listed datasets from the public database "IMDb"
+ * and decompresses the contained tab-separated data.
+ * 
+ * The compressed files are written to "./downloads",
+ * the uncompressed data is stored in "./src/main/resources".
+ * Already existing files will be overwritten.
+ */
 public class FileProcessor {
 
     private static final String STEM_FILE_URL = "https://datasets.imdbws.com/";

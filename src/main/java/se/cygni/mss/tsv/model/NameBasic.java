@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigInteger;
 
 @Entity
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class NameBasic {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private BigInteger name_id;
+    private Integer name_id;
     private String nconst;
     private String primaryName;
     private String birthYear;
