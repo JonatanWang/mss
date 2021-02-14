@@ -17,9 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import se.cygni.mss.tsv.listener.ImportPrincipalsCompletionNotificationListener;
-import se.cygni.mss.tsv.listener.ImportRatingsCompletionNotificationListener;
 import se.cygni.mss.tsv.model.Principal;
-import se.cygni.mss.tsv.model.Rating;
 import se.cygni.mss.tsv.processor.PrincipalItemProcessor;
 
 import javax.sql.DataSource;

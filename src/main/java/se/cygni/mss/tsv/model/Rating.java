@@ -2,7 +2,6 @@ package se.cygni.mss.tsv.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

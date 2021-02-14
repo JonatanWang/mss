@@ -3,7 +3,6 @@ package se.cygni.mss.tsv.processor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 import se.cygni.mss.tsv.model.Principal;
-import se.cygni.mss.tsv.model.Rating;
 
 @Slf4j
 public class PrincipalItemProcessor implements ItemProcessor<Principal, Principal> {

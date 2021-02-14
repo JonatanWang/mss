@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import se.cygni.mss.service.TitleBasicService;
 import se.cygni.mss.tsv.model.TitleBasic;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 public class TitleBasicController {
 
